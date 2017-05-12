@@ -2,7 +2,7 @@
 tayne
 *****
 
-Companion to entr_
+Companion to entr_.
 
 .. _entr: http://entrproject.org/
 
@@ -10,7 +10,7 @@ Companion to entr_
 Usage
 =====
 
-Create a configuration file in the same directory called ``.taynerc''::
+Create a configuration file in the same directory called ``.taynerc``::
 
     [tayne]
     patterns =

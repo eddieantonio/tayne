@@ -84,7 +84,7 @@ def main(arguments) -> None:
         options = tayne.get('entr_opts', '').split()
         cmd = tayne['command']
         subprocess.run([
-            'echo', *options, 'sh', '-c', cmd
+            'entr', *options, 'sh', '-c', cmd
         ], encoding='UTF-8', input='\n'.join(files))
 
 
