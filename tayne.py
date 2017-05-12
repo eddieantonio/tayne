@@ -66,7 +66,10 @@ def print_files(filenames):
         print(filename)
 
 
-def main(arguments) -> None:
+def main() -> None:
+    # Parse args
+    arguments = docopt.docopt(__doc__, version=f"{__package__} {__version__}")
+
     # Read config
     config = configparser.ConfigParser()
     config.read('.taynerc', encoding='UTF-8')
@@ -89,5 +92,4 @@ def main(arguments) -> None:
 
 
 if __name__ == '__main__':
-    arguments = docopt.docopt(__doc__, version=f"{__package__} {__version__}")
-    main(arguments)
+    main()
