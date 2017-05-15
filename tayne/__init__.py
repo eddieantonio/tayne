@@ -16,32 +16,15 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
-"""
-tayne - companion for entr(1)
-
-Usage:
-    tayne [--print]
-    tayne (-h | --help)
-    tayne --version
-
-Options:
-    -h --help   Show this screen.
-    --version   Show version
-"""
-
 import configparser
 import glob
 import os
 import sys
 import subprocess
 
-import docopt  # type: ignore
-
-
 __package__ = 'tayne'
-__semantic_version__ = 0, 1, 0
+__semantic_version__ = 0, 1, 1
 __version__ = '.'.join(map(str, __semantic_version__))
-
 
 TEST_CONFIG = """
 [tayne]
@@ -53,10 +36,6 @@ entr_opts = -c
 """
 
 
-def test():
-    pass
-
-
 def outputting_to_terminal():
     return os.isatty(sys.stdout.fileno())
 
@@ -64,32 +43,3 @@ def outputting_to_terminal():
 def print_files(filenames):
     for filename in filenames:
         print(filename)
-
-
-def main() -> None:
-    # Parse args
-    arguments = docopt.docopt(__doc__, version=f"{__package__} {__version__}")
-
-    # Read config
-    config = configparser.ConfigParser()
-    config.read('.taynerc', encoding='UTF-8')
-    tayne = config['tayne']
-
-    # Get list of files
-    patterns = tayne['patterns'].split()
-    files = [filename for pattern in patterns
-             for filename in glob.iglob(pattern, recursive=True)]
-    assert not any('\n' in filename for filename in files)
-
-    if arguments['--print'] or not outputting_to_terminal():
-        print_files(files)
-    else:
-        options = tayne.get('entr_opts', '').split()
-        cmd = tayne['command']
-        subprocess.run([
-            'entr', *options, 'sh', '-c', cmd
-        ], encoding='UTF-8', input='\n'.join(files))
-
-
-if __name__ == '__main__':
-    main()
