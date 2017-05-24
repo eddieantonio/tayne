@@ -22,5 +22,7 @@ setup(name='tayne',
       packages=find_packages(),
       install_requires=['docopt >= 0.6.0'],
       entry_points={
-          'console_scripts': ['tayne = tanye.__main__:main']
+          'console_scripts': [
+              'tayne=tayne.__main__:main'
+          ]
       })
