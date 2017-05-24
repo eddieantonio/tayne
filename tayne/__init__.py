@@ -23,7 +23,7 @@ import sys
 import subprocess
 
 __package__ = 'tayne'
-__semantic_version__ = 0, 1, 1
+__semantic_version__ = 0, 1, 2
 __version__ = '.'.join(map(str, __semantic_version__))
 
 TEST_CONFIG = """
